@@ -80,6 +80,13 @@ type variableProperties struct {
 			Exclude_static_libs []string `android:"arch_variant"`
 		} `android:"arch_variant"`
 
+		Malloc_not_svelte_libc32 struct {
+			Cflags              []string `android:"arch_variant"`
+			Shared_libs         []string `android:"arch_variant"`
+			Whole_static_libs   []string `android:"arch_variant"`
+			Exclude_static_libs []string `android:"arch_variant"`
+		} `android:"arch_variant"`
+
 		Malloc_zero_contents struct {
 			Cflags []string `android:"arch_variant"`
 		} `android:"arch_variant"`
