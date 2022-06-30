@@ -75,7 +75,7 @@ var (
 			"-mfpu=neon-fp-armv8",
 		},
 		"armv8-2a": []string{
-			"-march=armv8.2-a",
+			"-march=armv8.2-a+crypto+crc",
 			"-mfloat-abi=softfp",
 			"-mfpu=neon-fp-armv8",
 		},
