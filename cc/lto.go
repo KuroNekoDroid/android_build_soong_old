@@ -91,14 +91,8 @@ func (lto *lto) flags(ctx BaseModuleContext, flags Flags) Flags {
 	if lto.LTO(ctx) {
 		var ltoCFlag string
 		var ltoLdFlag string
-		if lto.ThinLTO() {
-			ltoCFlag = "-flto=thin -fsplit-lto-unit"
-		} else if lto.FullLTO() {
-			ltoCFlag = "-flto"
-		} else {
-			ltoCFlag = "-flto=thin -fsplit-lto-unit"
-			ltoLdFlag = "-Wl,--lto-O0"
-		}
+		ltoCFlag = "-flto"
+
 
 		flags.Local.CFlags = append(flags.Local.CFlags, ltoCFlag)
 		flags.Local.LdFlags = append(flags.Local.LdFlags, ltoCFlag)
@@ -127,6 +121,39 @@ func (lto *lto) flags(ctx BaseModuleContext, flags Flags) Flags {
 			flags.Local.LdFlags = append(flags.Local.LdFlags,
 				"-Wl,-plugin-opt,-import-instr-limit=5")
 		}
+		//LTO
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+			"-Wl,-mllvm,-inline-threshold=1")
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+			"-Wl,-mllvm,-inlinehint-threshold=1")
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+			"-Wl,-mllvm,-unroll-threshold=1")
+
+		//Polly + Polly DCE
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+				"-Wl,-mllvm,-polly")
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+				"-Wl,-mllvm,-polly-ast-use-context")
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+				"-Wl,-mllvm,-polly-invariant-load-hoisting")
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+				"-Wl,-mllvm,-polly-run-inliner")
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+				"-Wl,-mllvm,-polly-vectorizer=stripmine")
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+				"-Wl,-mllvm,-polly-run-dce")
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+				"-Wl,-mllvm,-polly-loopfusion-greedy=1")
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+				"-Wl,-mllvm,-polly-reschedule=1")
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+				"-Wl,-mllvm,-polly-postopts=1")
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+				"-Wl,-mllvm,-polly-omp-backend=LLVM")
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+				"-Wl,-mllvm,-polly-scheduling=dynamic")
+		flags.Local.LdFlags = append(flags.Local.LdFlags,
+				"-Wl,-mllvm,-polly-scheduling-chunksize=1")
 	}
 	return flags
 }
