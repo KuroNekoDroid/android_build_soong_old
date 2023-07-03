@@ -49,7 +49,7 @@ var (
 
 	armThumbCflags = []string{
 		"-mthumb",
-		"-Os",
+		"-Oz",
 	}
 
 	armArchVariantCflags = map[string][]string{
