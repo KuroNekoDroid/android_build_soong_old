@@ -359,7 +359,7 @@ func (this *stubDecorator) dumpAbi(ctx ModuleContext, symbolList android.Path) {
 	this.abiDumpPath = getNdkAbiDumpInstallBase(ctx).Join(ctx,
 		this.apiLevel.String(), ctx.Arch().ArchType.String(),
 		this.libraryName(ctx), "abi.xml")
-	untypedFlag := "--abort-on-untyped-symbols"
+	untypedFlag := ""
 	if proptools.BoolDefault(this.properties.Allow_untyped_symbols, false) {
 		untypedFlag = ""
 	}
