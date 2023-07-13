@@ -47,7 +47,7 @@ var (
 		"-fno-exceptions",
 		"-Wno-multichar",
 
-		"-Os",
+		"-O3",
 		"-fdebug-default-version=5",
 		"-Wno-pass-failed",
 
