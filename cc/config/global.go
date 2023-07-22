@@ -113,6 +113,9 @@ var (
 
 		// Turn off FMA which got enabled by default in clang-r445002 (http://b/218805949)
 		"-ffp-contract=off",
+		"-fdata-sections",
+		"-ffunction-sections",
+		"-fno-exceptions",
 	}
 
 	commonGlobalConlyflags = []string{}
@@ -157,6 +160,7 @@ var (
 		"-Wl,--exclude-libs,libunwind_llvm.a",
 		"-Wl,--exclude-libs,libunwind.a",
 		"-Wl,--icf=safe",
+		"-Wl,--gc-sections",
 	}
 
 	deviceGlobalLldflags = append(deviceGlobalLdflags,

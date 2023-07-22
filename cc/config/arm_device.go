@@ -35,6 +35,7 @@ var (
 	armLdflags = []string{
 		"-Wl,--hash-style=gnu",
 		"-Wl,-m,armelf",
+		"-Wl,--gc-sections",
 	}
 
 	armLldflags = armLdflags
@@ -49,7 +50,11 @@ var (
 
 	armThumbCflags = []string{
 		"-mthumb",
+		"-fdata-sections",
+		"-ffunction-sections",
 		"-Oz",
+		"-fno-exceptions",
+		"-fno-rtti",
 	}
 
 	armArchVariantCflags = map[string][]string{
