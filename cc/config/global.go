@@ -48,6 +48,7 @@ var (
 		"-Wno-multichar",
 
 		"-O3",
+		"-ggdb",
 		"-fdebug-default-version=5",
 		"-Wno-pass-failed",
 

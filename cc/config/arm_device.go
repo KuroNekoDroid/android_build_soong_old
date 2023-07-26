@@ -53,6 +53,7 @@ var (
 		"-fdata-sections",
 		"-ffunction-sections",
 		"-Oz",
+		"-ggdb",
 		"-fno-exceptions",
 		"-fno-rtti",
 	}
