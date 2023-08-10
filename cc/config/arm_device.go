@@ -52,7 +52,7 @@ var (
 		"-mthumb",
 		"-fdata-sections",
 		"-ffunction-sections",
-		"-Oz",
+		"-O3",
 		"-ggdb",
 		"-fno-exceptions",
 		"-fno-rtti",
