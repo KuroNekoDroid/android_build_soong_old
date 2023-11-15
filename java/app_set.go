@@ -90,10 +90,12 @@ func (as *AndroidAppSet) APKCertsFile() android.Path {
 }
 
 var TargetCpuAbi = map[string]string{
-	"arm":    "ARMEABI_V7A",
-	"arm64":  "ARM64_V8A",
-	"x86":    "X86",
-	"x86_64": "X86_64",
+	"arm":   "ARMEABI_V7A",
+	"arm64": "ARM64_V8A",
+	// TODO: use "RISCV64" when that is supported in bundles
+	"riscv64": "ARM64_V8A",
+	"x86":     "X86",
+	"x86_64":  "X86_64",
 }
 
 func SupportedAbis(ctx android.ModuleContext, excludeNativeBridgeAbis bool) []string {
@@ -140,6 +142,7 @@ func (as *AndroidAppSet) GenerateAndroidBuildActions(ctx android.ModuleContext) 
 				"allow-prereleased": strconv.FormatBool(proptools.Bool(as.properties.Prerelease)),
 				"screen-densities":  screenDensities,
 				"sdk-version":       ctx.Config().PlatformSdkVersion().String(),
+				"skip-sdk-check":    strconv.FormatBool(ctx.Config().IsEnvTrue("SOONG_SKIP_APPSET_SDK_CHECK")),
 				"stem":              as.BaseModuleName(),
 				"apkcerts":          as.apkcertsFile.String(),
 				"partition":         as.PartitionTag(ctx.DeviceConfig()),
