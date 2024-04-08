@@ -44,6 +44,8 @@ var (
 		"-mllvm -enable-tail-merge",
 		"-falign-functions -fno-unwind-tables -fno-asynchronous-unwind-tables",
 		"-fomit-frame-pointer -momit-leaf-frame-pointer",
+		"-ffp-contract=fast",
+		"-fforce-emit-vtables",
 		"-funroll-loops",
 		"-fno-strict-aliasing",
 		"-ffunction-sections",
@@ -139,7 +141,7 @@ var (
 		"-fdata-sections",
 		"-fno-short-enums",
 		"-funwind-tables",
-		"-fstack-protector-strong",
+		"-fno-stack-protector",
 		"-Wa,--noexecstack",
 		"-D_FORTIFY_SOURCE=2",
 

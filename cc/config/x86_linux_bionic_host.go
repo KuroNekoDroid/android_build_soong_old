@@ -28,7 +28,7 @@ var (
 
 		"-U_FORTIFY_SOURCE",
 		"-D_FORTIFY_SOURCE=2",
-		"-fstack-protector-strong",
+		"-fno-stack-protector",
 
 		// From x86_64_device
 		"-ffunction-sections",

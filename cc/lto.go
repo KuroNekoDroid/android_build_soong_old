@@ -119,15 +119,15 @@ func (lto *lto) flags(ctx BaseModuleContext, flags Flags) Flags {
 		// limit to 5 LLVM IR instructions, to balance binary size increase and performance.
 		if !ctx.isPgoCompile() && !ctx.isAfdoCompile() {
 			flags.Local.LdFlags = append(flags.Local.LdFlags,
-				"-Wl,-plugin-opt,-import-instr-limit=5")
+				"-Wl,-plugin-opt,-import-instr-limit=15")
 		}
 		//LTO
 		flags.Local.LdFlags = append(flags.Local.LdFlags,
-			"-Wl,-mllvm,-inline-threshold=1")
+			"-Wl,-mllvm,-inline-threshold=343")
 		flags.Local.LdFlags = append(flags.Local.LdFlags,
-			"-Wl,-mllvm,-inlinehint-threshold=1")
+			"-Wl,-mllvm,-inlinehint-threshold=169")
 		flags.Local.LdFlags = append(flags.Local.LdFlags,
-			"-Wl,-mllvm,-unroll-threshold=1")
+			"-Wl,-mllvm,-unroll-threshold=98")
 
 		//Polly + Polly DCE
 		flags.Local.LdFlags = append(flags.Local.LdFlags,

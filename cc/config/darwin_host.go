@@ -41,7 +41,7 @@ var (
 		"-m64",
 
 		"-integrated-as",
-		"-fstack-protector-strong",
+		"-fno-stack-protector",
 	}
 
 	darwinLdflags = []string{

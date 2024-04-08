@@ -36,7 +36,7 @@ var (
 		"-D__STDC_CONSTANT_MACROS",
 
 		"--gcc-toolchain=${LinuxGccRoot}",
-		"-fstack-protector-strong",
+		"-fno-stack-protector",
 	}
 
 	linuxGlibcCflags = []string{
