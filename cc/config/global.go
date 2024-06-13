@@ -37,8 +37,6 @@ var (
 		"-Winit-self",
 		"-Wpointer-arith",
 		"-Wunreachable-code-loop-increment",
-		"-ffp-contract=fast",
-		"-fforce-emit-vtables",
 
 		// Make paths in deps files relative
 		"-no-canonical-prefixes",
