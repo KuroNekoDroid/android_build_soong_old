@@ -52,10 +52,23 @@ var (
 		"-mthumb",
 		"-fdata-sections",
 		"-ffunction-sections",
-		"-O3",
+		"-Oz",
 		"-ggdb",
 		"-fno-exceptions",
 		"-fno-rtti",
+		"-fdata-sections",
+		"-ffunction-sections",
+		"-finline-functions",
+		"-ftree-vectorize",
+		"-funroll-loops",
+		"-ffinite-math-only",
+		"-freciprocal-math",
+		"-fcf-protection=none",
+		"-fno-trapping-math",
+		"-fno-math-errno",
+		"-fcf-protection=none",
+		"-ffp-contract=fast",
+		"-fomit-frame-pointer",
 	}
 
 	armArchVariantCflags = map[string][]string{
@@ -139,6 +152,15 @@ var (
 			// better solution comes around. See Bug 27340895
 			"-D__ARM_FEATURE_LPAE=1",
 		},
+		"cortex-a77": []string{
+			"-mcpu=cortex-a75",
+		"-mfpu=neon-fp-armv8",
+		// Fake an ARM compiler flag as these processors support LPAE which GCC/clang
+		// don't advertise.
+		// TODO This is a hack and we need to add it for each processor that supports LPAE until some
+		// better solution comes around. See Bug 27340895
+		"-D__ARM_FEATURE_LPAE=1",
+		},
 		"krait": []string{
 			"-mcpu=krait",
 			"-mfpu=neon-vfpv4",
@@ -218,6 +240,7 @@ func init() {
 	exportedVars.ExportStringListStaticVariable("ArmCortexA53Cflags", armCpuVariantCflags["cortex-a53"])
 	exportedVars.ExportStringListStaticVariable("ArmCortexA55Cflags", armCpuVariantCflags["cortex-a55"])
 	exportedVars.ExportStringListStaticVariable("ArmCortexA76Cflags", armCpuVariantCflags["cortex-a76"])
+	exportedVars.ExportStringListStaticVariable("ArmCortexA77Cflags", armCpuVariantCflags["cortex-a77"])
 	exportedVars.ExportStringListStaticVariable("ArmKraitCflags", armCpuVariantCflags["krait"])
 	exportedVars.ExportStringListStaticVariable("ArmKryoCflags", armCpuVariantCflags["kryo"])
 }
@@ -242,6 +265,7 @@ var (
 		"cortex-a73":     "${config.ArmCortexA53Cflags}",
 		"cortex-a75":     "${config.ArmCortexA55Cflags}",
 		"cortex-a76":     "${config.ArmCortexA76Cflags}",
+		"cortex-a77":     "${config.ArmCortexA77Cflags}",
 		"krait":          "${config.ArmKraitCflags}",
 		"kryo":           "${config.ArmKryoCflags}",
 		"kryo385":        "${config.ArmCortexA53Cflags}",
